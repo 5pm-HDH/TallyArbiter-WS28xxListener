@@ -46,7 +46,7 @@ The Tally Arbiter Python Listener Client uses the following libraries:
 These will have to be installed on the Pi in order for the script to function correctly.
 
 1. In your SSH terminal session, run the following:
-    * `sudo pip install rpi_ws281x`
+    * `sudo pip3 install rpi_ws281x`
     * `sudo pip3 install "python-socketio[client]"`: This library is used to communicate with a Tally Arbiter server over websockets.
     *  `sudo pip3 install git` To get the Tally Arbiter WS28xx Listener from this Repo
 
