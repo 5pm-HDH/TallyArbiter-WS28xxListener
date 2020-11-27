@@ -1,7 +1,7 @@
-# Tally Arbiter Blink(1) Listener
-Tally Arbiter Blink(1) Listener was written  by Joseph Adams and is distributed under the MIT License.
+# Tally Arbiter WS28xx Listener
+Tally Arbiter WS28xx Listener was written by 5pm-HDH, using the TallyArbiter-Blink1Listener from  josephdadams as Template and is distributed under the MIT License.
 
-Tally Arbiter Blink(1) Listener is an accessory program that allows you to connect to a Tally Arbiter server and control blink(1) devices (by Thingm) based on the incoming tally information.
+Tally Arbiter WS28xx Listener is an accessory program that allows you to connect to a Tally Arbiter server and control WS28xx LED Stripes based on the incoming tally information.
 
 It is written in Python and designed to run on a Pi Zero with minimal configuration needed. It uses the `python-socketio[client]` library to communicate with the Tally Arbiter server.
 
@@ -9,7 +9,6 @@ To learn more about the Tally Arbiter project, [click here](http://github.com/jo
 
 It is not sold, authorized, or associated with any other company or product.
 
-To contact the author or for more information, please visit [www.techministry.blog](http://www.techministry.blog).
 
 ## Getting Started
 A lot of these instructions on getting started are available all over the internet. Some highlights are listed here that should cover it from a top-level:
@@ -37,34 +36,26 @@ A lot of these instructions on getting started are available all over the intern
 1. Once you're connected to the Pi via SSH, it's a good idea to go ahead and change the default password. You can do this by running the `sudo raspi-config` tool, Option 1. Reboot the Pi when you're done by using `sudo shutdown -r now`. Your connection to the Pi will be terminated and you can reconnect once it has booted back up.
 1. Go ahead and update the Pi to the latest OS updates by running `sudo apt-get update -y` followed by `sudo apt-get upgrade -y`
 
+## TODO Wire and Setup WS28xx
+
 ## Installing Python Libraries and Script
 The Tally Arbiter Python Listener Client uses the following libraries:
-* `blink1`
+* `rpi-ws281x-python` https://github.com/rpi-ws281x/rpi-ws281x-python
 * `python-socketio[client]`
 
 These will have to be installed on the Pi in order for the script to function correctly.
 
 1. In your SSH terminal session, run the following:
-    * `sudo apt install libudev-dev libusb-1.0-0-dev`: The `libusb` library is necessary to communicate with the blink(1) device over USB.
-    * `sudo pip3 install blink1`: This is the base library to use with the blink(1).
+    * `sudo pip install rpi_ws281x`
     * `sudo pip3 install "python-socketio[client]"`: This library is used to communicate with a Tally Arbiter server over websockets.
+    *  `sudo pip3 install git` To get the Tally Arbiter WS28xx Listener from this Repo
 
     *If `pip3` is not installed, you can get it by running `sudo apt-get install python3-pip`.*
 
-1. Now that all the necessary libraries are installed and compiled, you need to copy the `tallyarbiter-blink1listener.py` file to your Pi. You can do this a number of ways, but one simple way is to execute this command through your SSH connection: `wget https://raw.githubusercontent.com/josephdadams/TallyArbiter-Blink1Listener/master/tallyarbiter-blink1listener.py`. This will copy the file into your current folder (you should still be the home folder for the `pi` account).
-1. Once the Python script has been copied over, go ahead and test it out to make sure everything is working properly. Run this in the SSH session: `sudo python3 tallyarbiter-blink1listener.py 192.168.1.6 4455`
-    
-    Be sure to replace the IP address `192.168.1.6` with the IP of your Tally Arbiter server. If you leave off the port, it will attempt to connect using port `4455`.
 
-1. If it is working properly, the blink(1) will flash green twice as it connects to the server. You can also view the newly added listener client in the Tally Arbiter Settings page. Use the "flash" button if you want to see the server communicate with the listener client.
+
 
 ## Setting up the script to start at boot
-Now that it is working properly, you will want to set up the script to run on boot so that all you have to do is turn on the Pi and wait for it to launch and connect to the server. There are several different methods in the Raspberry Pi OS to do this. The following describes how to do it using the `rc.local` file.
-1. In your SSH session, type `sudo nano /etc/rc.local`.
-1. Just before the last line of this file (`exit 0`), add the following: `sudo python3 /home/pi/tallyarbiter-blink1listener.py 192.168.1.6 4455 &`. The `&` is important because it allows the script to launch in a separate thread since we want the program to continue running in the background.
-1. Now reboot the Pi to test that the script runs on boot: `sudo reboot`. This will end your SSH session.
+TODO set up systemd service config  
 
-The program should now launch every time the Pi boots up, and automatically connect to your Tally Arbiter server once the server is available. The blink(1) device will flash white until it successfully connects to the server.
-
-# Improvements and Suggestions
-I welcome all improvements and suggestions. You can submit issues and pull requests, or contact me through [my blog](http://www.techministry.blog).
+The program should now launch every time the Pi boots up, and automatically connect to your Tally Arbiter server once the server is available. The ws28xx strip will flash white until it successfully connects to the server.
