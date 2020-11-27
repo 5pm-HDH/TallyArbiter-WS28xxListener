@@ -4,9 +4,19 @@ from signal import signal, SIGINT
 from sys import exit
 import sys
 import time
-from blink1.blink1 import Blink1
+from rpi_ws281x import PixelStrip, Color
 import socketio
 import json
+
+# LED strip configuration:
+LED_COUNT = 16        # Number of LED pixels.
+LED_PIN = 18          # GPIO pin connected to the pixels (18 uses PWM!).
+# LED_PIN = 10        # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
+LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
+LED_DMA = 10          # DMA channel to use for generating signal (try 10)
+LED_BRIGHTNESS = 255  # Set to 0 for darkest and 255 for brightest
+LED_INVERT = False    # True to invert the signal (when using NPN transistor level shift)
+LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 device_states = []
 bus_options = []
@@ -152,17 +162,19 @@ def evaluateMode():
 		doBlink(255, 0, 0)
 	elif (mode_preview == True) and (mode_program == True):		# preview+program mode, color it yellow
 		doBlink(255, 255, 0)
-	else:														# no source, turn it off
+	else:								# no source, turn it off
 		doBlink(0, 0, 0)
 
 def doBlink(r, g, b):
-	b1.fade_to_rgb(100, r, g, b)
+    color = Color(r, g, b)
+    for i in range(strip.numPixels()):
+        strip.setPixelColor(i, color)
+        strip.show()
+        time.sleep(100.0 / 1000.0)
 
-try:
-	b1 = Blink1()
-except:
-	print('No blink(1) devices found.')
-	exit (0)
+strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+# Intialize the library (must be called once before other functions).
+strip.begin()
 
 while(1):
 	try:
