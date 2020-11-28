@@ -58,7 +58,7 @@ These will have to be installed on the Pi in order for the script to function co
 
 ## Setting up the script to start at boot
 To setup the script as a systemd service just run the `install.sh` bash-script as root.
-This will create a user (tally) and install the script in its directory and enable a systemd service 
+This will create a directory and install the script into /root/tally and enable a systemd service 
 
 ``` 
 sudo install.sh

@@ -4,11 +4,11 @@ Requires = systemd-user-sessions.service network.target sound.target
 After = multi-user.target
 
 [Service]
-User = tally
-Group = tally
+User = root
+Group = root
 Type = simple
-WorkingDirectory=/home/tally/bin
-ExecStart = python3 /home/tally/bin/tallyarbiter-ws281xlistener.py
+WorkingDirectory=/root/tally
+ExecStart = python3 /root/tally/tallyarbiter-ws281xlistener.py
 Restart = always
 RestartSec = 5
 
