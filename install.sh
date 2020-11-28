@@ -1,6 +1,7 @@
 #!/bin/bash
 
-read -p "Check config_ws281x.json before install! " -n 1 -r
+read -p "Check config_ws281x.json before install! [y/n] " -n 1 -r
+echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 
@@ -13,11 +14,12 @@ then
   mkdir /home/tally/bin
 
   cp tallyarbiter-ws281xlistener.py /home/tally/bin/tallyarbiter-ws281xlistener.py
-  cp config_ws281x.json home/tally/bin/config_ws281x.json
+  cp config_ws281x.json /home/tally/bin/config_ws281x.json
 
   chown -R tally /home/tally/bin
 
-  read -p "Enable systemd service " -n 1 -r
+  read -p "Enable systemd service [y/n]" -n 1 -r
+  echo
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
       cp ws281x.service /etc/systemd/system/ws281x.service
