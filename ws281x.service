@@ -1,0 +1,16 @@
+[Unit]
+Description = WS281X Tally Listener
+Requires = systemd-user-sessions.service network.target sound.target
+After = multi-user.target
+
+[Service]
+User = tally
+Group = tally
+Type = simple
+WorkingDirectory=/home/tally/bin
+ExecStart = python3 /home/tally/bin/tallyarbiter-ws281xlistener.py
+Restart = always
+RestartSec = 5
+
+[Install]
+WantedBy = multi-user.target

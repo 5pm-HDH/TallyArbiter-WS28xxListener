@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read -p "Check config_ws281x.json before install! [y/n] " -n 1 -r
+read -p "did you check config_ws281x.json before install? [y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
