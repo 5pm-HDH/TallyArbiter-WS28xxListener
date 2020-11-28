@@ -20,7 +20,7 @@ then
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
       cp ws281x.service /etc/systemd/system/ws281x.service
-      systemctl reload-daemon
+      systemctl daemon-reload
       systemctl enable ws281x.service
   fi
 fi
