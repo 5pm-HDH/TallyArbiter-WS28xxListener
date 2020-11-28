@@ -1,7 +1,7 @@
-# Tally Arbiter WS28xx Listener
-Tally Arbiter WS28xx Listener was written by 5pm-HDH, using the TallyArbiter-Blink1Listener from  josephdadams as Template and is distributed under the MIT License.
+# Tally Arbiter WS281x Listener
+Tally Arbiter WS281x Listener was written by 5pm-HDH, using the TallyArbiter-Blink1Listener from  josephdadams as Template and is distributed under the MIT License.
 
-Tally Arbiter WS28xx Listener is an accessory program that allows you to connect to a Tally Arbiter server and control WS28xx LED Stripes based on the incoming tally information.
+Tally Arbiter WS281x Listener is an accessory program that allows you to connect to a Tally Arbiter server and control WS281x LED Stripes based on the incoming tally information.
 
 It is written in Python and designed to run on a Pi Zero with minimal configuration needed. It uses the `python-socketio[client]` library to communicate with the Tally Arbiter server.
 
@@ -36,7 +36,7 @@ A lot of these instructions on getting started are available all over the intern
 1. Once you're connected to the Pi via SSH, it's a good idea to go ahead and change the default password. You can do this by running the `sudo raspi-config` tool, Option 1. Reboot the Pi when you're done by using `sudo shutdown -r now`. Your connection to the Pi will be terminated and you can reconnect once it has booted back up.
 1. Go ahead and update the Pi to the latest OS updates by running `sudo apt-get update -y` followed by `sudo apt-get upgrade -y`
 
-## TODO Wire and Setup WS28xx
+## TODO Wire and Setup WS281x
 
 ## Installing Python Libraries and Script
 The Tally Arbiter Python Listener Client uses the following libraries:
@@ -48,7 +48,7 @@ These will have to be installed on the Pi in order for the script to function co
 1. In your SSH terminal session, run the following:
     * `sudo pip3 install rpi_ws281x`
     * `sudo pip3 install "python-socketio[client]"`: This library is used to communicate with a Tally Arbiter server over websockets.
-    *  `sudo pip3 install git` To get the Tally Arbiter WS28xx Listener from this Repo
+    *  `sudo pip3 install git` To get the Tally Arbiter WS281x Listener from this Repo
 
     *If `pip3` is not installed, you can get it by running `sudo apt-get install python3-pip`.*
 
@@ -58,4 +58,4 @@ These will have to be installed on the Pi in order for the script to function co
 ## Setting up the script to start at boot
 TODO set up systemd service config  
 
-The program should now launch every time the Pi boots up, and automatically connect to your Tally Arbiter server once the server is available. The ws28xx strip will flash white until it successfully connects to the server.
+The program should now launch every time the Pi boots up, and automatically connect to your Tally Arbiter server once the server is available. The ws281x strip will flash white until it successfully connects to the server.
